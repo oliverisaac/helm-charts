@@ -1,6 +1,6 @@
 argocd:
   namespace: argocd
-  repoURL: https://github.com/oliverisaac/helm-charts
+  repoURL: https://oliverisaac.github.io/helm-charts/
   deployChart: nested
   targetRevision: v0.22.1
 
