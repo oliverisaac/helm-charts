@@ -32,9 +32,12 @@ jobs:
       - name: Set Helm Versions
         run: |
           set -Eeuo pipefail
+          IFS=$'\n'
+
           helm repo add oliverisaac https://oliverisaac.github.io/helm-charts
-          find charts -maxdepth 1 -mindepth 1 -type d |
-            while read dir; do
+
+          dirs=( $( find charts -maxdepth 1 -mindepth 1 -type d  ) )
+          for dir in "${dirs[@]}"; do
               chart_name=$( awk -F'/' '{print $NF}' )
 
               defined_version=$( cat "${dir}/Chart.yaml" | yq .version )
