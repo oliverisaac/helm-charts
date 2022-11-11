@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: {{ .Values.argocd.namespace }}
+spec:
+  destination:
+    namespace: {{ .Values.vault.argocd.namespace }}
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: {{ .Values.argocd.deployChart }}
+    repoURL: {{ .Values.argocd.repoURL }}
+    targetRevision: {{ .Values.argocd.targetRevision }}
+    helm:
+      parameters:
+      - name: ".vault.server.ingress.hosts[0].host"
+        value: {{ .Values.vault.hostname | quote }}
+      - name: ".vault.server.ingress.tls[0].hosts[0]"
+        value: {{ .Values.vault.hostname | quote }}
+      - name: ".vault.server.volumes[0].secret.secretName"
+        value: {{ .Values.vault.configSecretName | quote }}
+      {{- with .Values.vault.extraParameters }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+  syncPolicy:
+    automated:
+      prune: {{ .Values.vault.argocd.prune }}
+      selfHeal: {{ .Values.vault.argocd.selfHeal }}
+    syncOptions:
+    {{ if .Values.vault.argocd.createNamespace }}
+    - CreateNamespace=true
+    {{- end }}

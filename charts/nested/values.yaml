@@ -1,0 +1,37 @@
+cert-manager:
+  enabled: false
+
+vault:
+  enabled: true
+  injector:
+    enabled: true
+  server:
+    enabled: true
+    updateStrategyType: RollingUpdate
+    ingress:
+      enabled: true
+      activeService: false
+      ingressClassName: nginx
+      hosts:
+      - host: dynamic
+      tls:
+      - secretName: vault-tls
+        hosts:
+        - dynamic
+    dataStorage: 
+      enabled: false
+    ha:
+      enabled: true
+      replicas: 1
+    volumes:
+    - name: "userconfig-vault-storage-config"
+      secret:
+        defaultMode: 420
+        secretName:  dynamic
+    volumeMounts:
+    - name: "userconfig-vault-storage-config"
+      mountPath: /vault/userconfig/vault-storage-config
+      readOnly: true
+    extraArgs: "-config=/vault/userconfig/vault-storage-config/config.hcl"
+    readinessProbe:
+      path: "/v1/sys/health?standbyok=true&sealedcode=200"

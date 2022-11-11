@@ -1,0 +1,24 @@
+argocd:
+  namespace: argocd
+  repoURL: https://github.com/oliverisaac/helm-charts
+  deployChart: nested
+  targetRevision: v0.22.1
+
+
+vault:
+  argocd:
+    prune: true
+    selfHeal: true
+    createNamespace: true
+    namespace: vault
+
+  # The configSecretName will be mounted as a volume
+  # You MUST have config.hcl as a key in that secret
+  configSecretName: "" # secret name that contains a vault configuration file
+  hostname: "" # hostname that vault should be accessible at
+
+  # extraparameters can be any array of name/value pairs
+  extraParameters: []
+  # - name: example.nested[0].key
+  #   value: bob
+
