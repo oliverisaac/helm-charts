@@ -14,11 +14,11 @@ spec:
     targetRevision: {{ .Values.argocd.targetRevision }}
     helm:
       parameters:
-      - name: ".vault.server.ingress.hosts[0].host"
+      - name: "vault.server.ingress.hosts[0].host"
         value: {{ .Values.vault.hostname | quote }}
-      - name: ".vault.server.ingress.tls[0].hosts[0]"
+      - name: "vault.server.ingress.tls[0].hosts[0]"
         value: {{ .Values.vault.hostname | quote }}
-      - name: ".vault.server.volumes[0].secret.secretName"
+      - name: "vault.server.volumes[0].secret.secretName"
         value: {{ .Values.vault.configSecretName | quote }}
       {{- with .Values.vault.extraParameters }}
       {{- toYaml . | nindent 6 }}
