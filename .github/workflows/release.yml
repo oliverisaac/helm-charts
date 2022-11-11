@@ -52,10 +52,14 @@ jobs:
             done
 
       - name: Ensure Argocd Release Revision is Latest
-        run: 
-          releaseRevision=$( yq .version charts/nested/Chart.yaml )
-          yq --inplace ".argocd.targetRevision = \"${releaseRevision}\"" charts/argo-deploy/values.yaml
-          yq --inplace ".appVersion = \"${releaseRevision}\"" charts/argo-deploy/Chart.yaml
+        run: |
+          set -Eeuo pipefail
+
+          releaseRevision=$( yq .version charts/nested/Chart.yaml );
+
+          yq --inplace ".argocd.targetRevision = \"${releaseRevision}\"" charts/argo-deploy/values.yaml;
+
+          yq --inplace ".appVersion = \"${releaseRevision}\"" charts/argo-deploy/Chart.yaml;
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.1.0

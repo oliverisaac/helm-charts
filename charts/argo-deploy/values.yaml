@@ -4,7 +4,6 @@ argocd:
   deployChart: nested
   targetRevision: v0.22.1
 
-
 vault:
   argocd:
     prune: true
