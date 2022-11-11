@@ -47,8 +47,15 @@ jobs:
               new_version=$( echo "$old_version" | awk -F '.' '{ OFS="."; print $1, $2, $3 + 1; }' )
 
               highest_version=$( printf "%s\n" "$new_version" "$defined_version" | sort --version-sort | tail -n 1 )
+              >&2 echo "Setting version of ${chart_name} to ${highest_version}"
               yq --inplace ".version = \"${highest_version}\"" "${dir}/Chart.yaml"
             done
+
+      - name: Ensure Argocd Release Revision is Latest
+        run: 
+          releaseRevision=$( yq .version charts/nested/Chart.yaml )
+          yq --inplace ".argocd.targetRevision = \"${releaseRevision}\"" charts/argo-deploy/values.yaml
+          yq --inplace ".appVersion = \"${releaseRevision}\"" charts/argo-deploy/Chart.yaml
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.1.0
