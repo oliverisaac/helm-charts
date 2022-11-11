@@ -21,11 +21,34 @@ jobs:
 
       - name: Add Helm Dependencies
         run: |
+          set -Eeuo pipefail
+
           find . -name 'Chart.yaml' | while read f; do
             yq '.dependencies[].repository' "$f";
           done | sort -u | while read url; do
             helm repo add "$(echo "$url" | sha256sum | cut -d ' ' -f1)" "$url"
           done
+
+      - name: Set Helm Versions
+        run: |
+          set -Eeuo pipefail
+          helm repo add oliverisaac https://oliverisaac.github.io/helm-charts
+          find charts -maxdepth 1 -mindepth 1 -type d |
+            while read dir; do
+              chart_name=$( awk -F'/' '{print $NF}' )
+
+              defined_version=$( cat "${dir}/Chart.yaml" | yq .version )
+
+              if ! old_version=$( helm show chart oliverisaac/"${chart_name}" | yq .version ); then
+                old_version="0.0.0"
+              fi
+
+              # Update the last entry in the old_version to be N + 1
+              new_version=$( echo "$old_version" | awk -F '.' '{ OFS="."; print $1, $2, $3 + 1; }' )
+
+              highest_version=$( printf "%s\n" "$new_version" "$defined_version" | sort --version-sort | tail -n 1 )
+              yq --inplace ".version = \"${highest_version}\"" "${dir}/Chart.yaml"
+            done
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.1.0
