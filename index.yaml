@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   argo-deploy:
   - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-11-11T02:37:46.089250454Z"
+    description: A Helm chart for Kubernetes
+    digest: dae61b079df2d1b41ec86292167bc63083187f736de76ed4618dd9f0d9c82ae6
+    name: argo-deploy
+    type: application
+    urls:
+    - https://github.com/oliverisaac/helm-charts/releases/download/argo-deploy-1.0.1/argo-deploy-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-11-11T02:22:13.922773113Z"
     description: A Helm chart for Kubernetes
