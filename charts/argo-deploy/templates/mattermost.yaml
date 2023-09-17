@@ -114,7 +114,7 @@ spec:
 
         mysql:
           enabled: true
-          mysqlRootPassword: ""
+          mysqlRootPassword: "{{ .Values.mattermost.mysql.rootPassword }}"
           mysqlUser: "{{ .Values.mattermost.mysql.username }}"
           mysqlPassword: "{{ .Values.mattermost.mysql.password }}"
           mysqlDatabase: mattermost
