@@ -23,6 +23,12 @@ vault:
 
 mattermost:
   hostname: mattermost.oisaac.dev
+  argocd:
+    prune: true
+    selfHeal: true
+    createNamespace: true
+    namespace: mattermost
+
 
 longhorn:
   argocd:

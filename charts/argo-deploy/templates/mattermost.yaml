@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: longhorn
+  name: mattermost
   namespace: {{ .Values.argocd.namespace }}
 spec:
   destination:
-    namespace: {{ .Values.longhorn.argocd.namespace }}
+    namespace: {{ .Values.mattermost.argocd.namespace }}
     server: https://kubernetes.default.svc
   project: default
   syncPolicy:
     automated:
-      prune: {{ .Values.longhorn.argocd.prune }}
-      selfHeal: {{ .Values.longhorn.argocd.selfHeal }}
+      prune: {{ .Values.mattermost.argocd.prune }}
+      selfHeal: {{ .Values.mattermost.argocd.selfHeal }}
     syncOptions:
-    {{ if .Values.longhorn.argocd.createNamespace }}
+    {{ if .Values.mattermost.argocd.createNamespace }}
     - CreateNamespace=true
     {{- end }}
   source:
