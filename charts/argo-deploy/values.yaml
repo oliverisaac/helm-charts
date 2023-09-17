@@ -21,7 +21,7 @@ vault:
   # - name: example.nested[0].key
   #   value: bob
 
-mattermhost:
+mattermost:
   hostname: mattermost.oisaac.dev
 
 longhorn:
