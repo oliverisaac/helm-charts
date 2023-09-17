@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   argo-deploy:
   - apiVersion: v2
+    appVersion: 1.0.9
+    created: "2023-09-17T04:04:17.162822374Z"
+    description: A Helm chart for Kubernetes
+    digest: 53b19801b765e495657b057a91f1aea0a44ec9c070fd298b8cc88fed64168a19
+    name: argo-deploy
+    type: application
+    urls:
+    - https://github.com/oliverisaac/helm-charts/releases/download/argo-deploy-1.0.10/argo-deploy-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
     appVersion: 1.0.8
     created: "2023-09-17T03:44:13.959421436Z"
     description: A Helm chart for Kubernetes
@@ -112,6 +122,25 @@ entries:
     - https://github.com/oliverisaac/helm-charts/releases/download/argo-deploy-0.1.0/argo-deploy-0.1.0.tgz
     version: 0.1.0
   nested:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-09-17T04:04:17.299712447Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.10.0
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: v0.22.1
+    description: A Helm chart for Kubernetes
+    digest: 93c7958a13b7007df9de2e978852bb4a4f8f1cd04d2bd313a950cc5768b91119
+    name: nested
+    type: application
+    urls:
+    - https://github.com/oliverisaac/helm-charts/releases/download/nested-1.0.9/nested-1.0.9.tgz
+    version: 1.0.9
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-09-17T03:44:14.093217117Z"
