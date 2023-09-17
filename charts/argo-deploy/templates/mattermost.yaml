@@ -248,7 +248,7 @@ spec:
         ## Configure startup, liveness and readiness probes
         startupProbe:
           initialDelaySeconds: 10
-          failureThreshold: 30
+          failureThreshold: 300
           timeoutSeconds: 5
           periodSeconds: 10
 
