@@ -21,3 +21,10 @@ vault:
   # - name: example.nested[0].key
   #   value: bob
 
+longhorn:
+  argocd:
+    prune: true
+    selfHeal: true
+    createNamespace: true
+    namespace: longhorn
+

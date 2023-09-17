@@ -28,3 +28,6 @@ dependencies:
     condition: vault.enabled
     repository: "https://helm.releases.hashicorp.com"
     version: "v0.22.1"
+  - name: longhorn
+    repository: "https://charts.longhorn.io"
+    version: "v1.5.1"
