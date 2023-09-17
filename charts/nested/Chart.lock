@@ -5,5 +5,8 @@ dependencies:
 - name: vault
   repository: https://helm.releases.hashicorp.com
   version: 0.22.1
-digest: sha256:a9affc01fbe7e01b60ef946e65e185c76c54b0d2badf6c2951e917ef751de2da
-generated: "2022-11-10T19:22:49.953583-06:00"
+- name: longhorn
+  repository: https://charts.longhorn.io
+  version: 1.5.1
+digest: sha256:4a3cf16d18ca3e551346904deed78f07c53028da058a3265d6434dcc7a3a6b46
+generated: "2023-09-16T22:18:19.382929-05:00"
