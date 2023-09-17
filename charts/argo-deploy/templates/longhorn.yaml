@@ -17,9 +17,9 @@ spec:
     - CreateNamespace=true
     {{- end }}
   source:
-    chart: {{ .Values.argocd.deployChart }}
-    repoURL: {{ .Values.argocd.repoURL }}
-    targetRevision: {{ .Values.argocd.targetRevision }}
+    chart: longhorn
+    repoURL: https://charts.longhorn.io
+    targetRevision: '1.5.*'
     helm:
       parameters:
       - name: "longhorn.server.ingress.hosts[0].host"
