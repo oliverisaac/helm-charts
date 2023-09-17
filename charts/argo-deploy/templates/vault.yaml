@@ -20,6 +20,10 @@ spec:
         value: {{ .Values.vault.hostname | quote }}
       - name: "vault.server.volumes[0].secret.secretName"
         value: {{ .Values.vault.configSecretName | quote }}
+      - name: vault.server.volumes[0].name
+        value: "userconfig-vault-storage-config"
+      - name: "vault.server.volumes[0].secret.defaultMode"
+        vaolue: "420"
       {{- with .Values.vault.extraParameters }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
