@@ -21,6 +21,9 @@ vault:
   # - name: example.nested[0].key
   #   value: bob
 
+mattermhost:
+  hostname: mattermost.oisaac.dev
+
 longhorn:
   argocd:
     prune: true
